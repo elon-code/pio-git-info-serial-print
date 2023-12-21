@@ -1,0 +1,16 @@
+{
+  "name": "PIO MCU Git Info Serial Print",
+  "version": "1.0.0",
+  "description": "A library to embed and print Git information in PlatformIO projects.",
+  "keywords": ["git", "version-control", "debugging"],
+  "authors": {
+    "name": "Elon Goliger",
+    "email": "egoliger@exploratorium.edu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/exploratorium/pio-mcu-git-info-serial-print/"
+  },
+  "dependencies": {
+  }
+}
