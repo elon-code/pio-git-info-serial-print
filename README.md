@@ -35,7 +35,7 @@ or if using streaming library:
 Serial << "Git Information:\n";
 Serial << "Repository Name: " << GIT_REPO_NAME << '\n';
 Serial << "Date last updated (UTC): " << GIT_DATE << '\n';
-Serial << "Repository URL: " << REPO_URL << '\n';
+Serial << "Repository URL: " << GIT_REPO_URL << '\n';
 Serial << "Tag: " << GIT_TAG << '\n';
 Serial << "Branch: " << GIT_BRANCH << '\n';
 Serial << "Commit Hash: " << GIT_COMMIT_HASH << '\n';
@@ -43,7 +43,7 @@ Serial << "Author: " << GIT_AUTHOR << '\n';
 Serial << "Author Email: " << GIT_AUTHOR_EMAIL << '\n';
 ```
 
-* Configuration: It is recommended to make a function that does all of this printing, as it helps simplify 
+* Configuration: It is recommended to make a function that does all of this printing, as it helps simplify. You may organize how you desire, but this is how I prefer it.
 * Dependencies:
 PlatformIO is necessary, this will not work with Arduino IDE. Python is also a dependency, but this script uses platformIO's python environment, so no download or install is necessary.
 
