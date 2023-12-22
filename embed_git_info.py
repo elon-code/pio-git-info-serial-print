@@ -28,7 +28,7 @@ def get_git_info():
     return info
 
 def write_header(info):
-    with open('git_info.h', 'w') as f:
+    with open('include/git_info.h', 'w') as f:
         for key, value in info.items():
             f.write(f"#define GIT_{key.upper()} \"{value}\"\n")
 
