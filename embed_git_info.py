@@ -19,7 +19,6 @@ def get_git_info():
         # 'git_author': "git log -1 --format=%cn", # These are optional variables, they are not really necessary in printout
         # 'git_author_email': "git log -1 --format=%ce", # These are optional variables, they are not really necessary in printout
         'git_repo_url': "git config --get remote.origin.url",
-        'git_repo_name': "git config --get remote.origin.url | xargs basename -s .git",
         'local_user_name': "git config user.name",
         'local_user_email': "git config user.email",
         # 'folder_name': os.path.basename(os.getcwd()), # I feel git repo name is better, but may choose otherwise
@@ -69,7 +68,7 @@ def write_header(info, crc):
 try:
     git_info = get_git_info()
     # Replace with the actual path to your main file
-    main_file_crc = calculate_crc('path/to/your/main/file')  
+    main_file_crc = calculate_crc('src/main.cpp')  
     write_header(git_info, main_file_crc)
 except Exception as e:
     print(f"An error occurred: {e}")
