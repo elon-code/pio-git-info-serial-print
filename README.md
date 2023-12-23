@@ -48,9 +48,9 @@ or if using streaming library:
     << "\n=================================\n";
 ```
 
-* Configuration: It is recommended to make a function that does all of this printing, as it helps simplify. You may organize how you desire, but this is how I prefer it.
+* Configuration: It is recommended to make a function that does all of this printing, as it helps simplify code. You may organize how you desire, but this is how I prefer it.
 * Dependencies:
-PlatformIO is necessary, this will not work with Arduino IDE. Python is also a dependency, but this script uses platformIO's python environment, so no download or install is necessary.
+PlatformIO is necessary, this will not work with Arduino IDE. Python is also a dependency, but this script uses platformIO's python environment, so no download or install is necessary. In fact, it is likely this code will not run successfully on your local environment, it is designed to be ran in PlatformIO python environment.
 
 ### Who do I talk to? ###
 
