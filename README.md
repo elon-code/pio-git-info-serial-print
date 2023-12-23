@@ -4,7 +4,7 @@
 
 * Quick summary
 The purpose of this respository is to have an Arduino script that you can add to platform IO. The script will create a header file that will give you these as cpp variables.
-* Version 1
+* Version 1.1
 
 ### How do I get set up? ###
 
