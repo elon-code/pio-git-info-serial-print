@@ -48,8 +48,20 @@ or if using streaming library:
     << "\n=================================\n";
 ```
 
-* Configuration: It is recommended to make a function that does all of this printing, as it helps simplify code. You may organize how you desire, but this is how I prefer it.
-* Dependencies:
+* Configuration
+
+It is recommended to make a function that does all of this printing, as it helps simplify code. You may organize how you desire, but this is how I prefer it.
+
+If you are using Git, be sure to add the auto-generated header file path (relative path) to your .gitignore file.
+
+Another thing to note is that you may want to add some #ifdef statements into your code to make sure it won't printout these headers when running in Arduino IDE. Here is an example of how to do this:
+```
+#ifdef PLATFORMIO
+  // Code to execute only when compiled with PlatformIO
+#endif
+```
+* Dependencies
+
 PlatformIO is necessary, this will not work with Arduino IDE. Python is also a dependency, but this script uses platformIO's python environment, so no download or install is necessary. In fact, it is likely this code will not run successfully on your local environment, it is designed to be ran in PlatformIO python environment.
 
 ### Who do I talk to? ###
