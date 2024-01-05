@@ -19,7 +19,7 @@ The purpose of this respository is to have an Arduino script that you can add to
   // This is the recommended setup, you may choose other setups
   Serial.print("Git Information:\n");
   Serial.print("Build Date/Time (local time): "); Serial.print(BUILD_DATE); Serial.print("\n");
-  Serial.print("Builder Name: "); Serial.print(GIT_NAME); Serial.print(" Email: "); Serial.print(GIT_EMAIL); Serial.print("\n");
+  Serial.print("Builder Name: "); Serial.print(LOCAL_USER_NAME); Serial.print(" Email: "); Serial.print(LOCAL_USER_EMAIL); Serial.print("\n");
   Serial.print("Repository URL: "); Serial.print(GIT_REPO_URL); Serial.print("\n");
   Serial.print("Branch: "); Serial.print(GIT_BRANCH); Serial.print(" Tag: "); Serial.print(GIT_TAG); Serial.print("\n\n"); // Optional, only use if using tags.
   Serial.print("Commit Hash: "); Serial.print(GIT_COMMIT_HASH); Serial.print("\n");
@@ -40,7 +40,7 @@ or if using streaming library:
 // Using Streaming Library
   Serial << "Git Information:\n"
     << "Build Date/Time (local time): " << BUILD_DATE << "\n"
-    << "Builder Name:  " << GIT_NAME << " Email: " << GIT_EMAIL  << "\n"
+    << "Builder Name:  " << LOCAL_USER_NAME << " Email: " << LOCAL_USER_EMAIL  << "\n"
     << "Repository URL: " << GIT_REPO_URL << "\n"
     << "Branch: " << GIT_BRANCH << " Tag: " << GIT_TAG  << "\n\n"
     << "Commit Hash: " << GIT_COMMIT_HASH << "\n" 
