@@ -1,3 +1,5 @@
+# https://bitbucket.org/exploratorium/pio-git-info-serial-print/src/main/
+
 # Importing the environment from PlatformIO and necessary modules
 Import("env")
 
