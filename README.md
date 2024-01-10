@@ -52,7 +52,8 @@ or if using streaming library:
 
 It is recommended to make a function that does all of this printing, as it helps simplify code. You may organize how you desire, but this is how I prefer it.
 
-If you are using Git, be sure to add the auto-generated header file path (relative path) to your .gitignore file.
+If you are using Git, be sure to add the auto-generated header file path (relative path) to your .gitignore file. If you have already tracked it with git, you will need to remove it from git tracking. You can do this with the following command:
+```git rm --cached include/git_info.h```
 
 Another thing to note is that you may want to add some #ifdef statements into your code to make sure it won't printout these headers when running in Arduino IDE. Here is an example of how to do this:
 ```
