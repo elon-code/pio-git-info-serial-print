@@ -18,14 +18,11 @@ def get_git_info():
         'git_branch': "git rev-parse --abbrev-ref HEAD",
         'git_commit_hash': "git rev-parse HEAD",
         # 'git_date': "git log -1 --format=%cd", # I believe build date is better then git date. Git date can be found with commit hash
-        # 'git_author': "git log -1 --format=%cn", # These are optional variables, they are not really necessary in printout
-        # 'git_author_email': "git log -1 --format=%ce", # These are optional variables, they are not really necessary in printout
         'git_repo_url': "git config --get remote.origin.url",
-        'local_user_name': "git config user.name",
-        'local_user_email': "git config user.email",
+        'git_user_name': "git config user.name",
+        'git_user_email': "git config user.email",
         # 'folder_name': os.path.basename(os.getcwd()), # I feel git repo name is better, but may choose otherwise
         # 'computer_user': os.getlogin(), # I feel git user is better, but you may choose computer username
-        # Adding build date and time
         'build_date': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), # date of build
     }
 
@@ -33,7 +30,7 @@ def get_git_info():
     info = {}
     for key, command in commands.items():
         try:
-            if key in ['build_date', 'build_time', 'folder_name']:
+            if key in ['build_date', 'folder_name', 'computer_user']:
                 # Directly using values for certain keys
                 result = commands[key]
             else:
