@@ -8,7 +8,7 @@ The purpose of this respository is to have an Arduino script that you can add to
 ### Summary of set up ###
 
 1. Copy py script to your project folder
-2. In your platform.ini file, include this line:
+2. In your platform.ini file, include this line (replace embed_git_info.py with the name of your script, if different):
 ```extra_scripts = pre:embed_git_info.py```
 3. Include generated header in your main.cpp file: ```#include "git_info.h"```
 4. Add a serial printout for your git info:
@@ -18,7 +18,7 @@ The purpose of this respository is to have an Arduino script that you can add to
   Serial.print("Build Date/Time (local time): "); Serial.print(BUILD_DATE); Serial.print("\n");
   Serial.print("Builder's Name: "); Serial.print(GIT_USER_NAME); Serial.print(" Email: "); Serial.print(GIT_USER_EMAIL); Serial.print("\n");
   Serial.print("Repository URL: "); Serial.print(GIT_REPO_URL); Serial.print("\n");
-  Serial.print("Branch: "); Serial.print(GIT_BRANCH); Serial.print(" Tag: "); Serial.print(GIT_TAG); Serial.print("\n\n"); // Optional, only use if using tags.
+  Serial.print("Branch: "); Serial.print(GIT_BRANCH); Serial.print(" | Tag: "); Serial.print(GIT_TAG); Serial.print("\n\n"); // Optional, only use if using tags.
   Serial.print("Commit Hash: "); Serial.print(GIT_COMMIT_HASH); Serial.print("\n");
   Serial.print("CRC: "); Serial.println(static_cast<long>(MAIN_FILE_CRC));
   Serial.print("\n=================================\n");
@@ -36,7 +36,7 @@ or if using streaming library:
     << "Build Date/Time (local time): " << BUILD_DATE << "\n"
     << "Builder's Name:  " << GIT_USER_NAME << " Email: " << GIT_USER_EMAIL  << "\n"
     << "Repository URL: " << GIT_REPO_URL << "\n"
-    << "Branch: " << GIT_BRANCH << " Tag: " << GIT_TAG  << "\n\n"
+    << "Branch: " << GIT_BRANCH << " | Tag: " << GIT_TAG  << "\n\n"
     << "Commit Hash: " << GIT_COMMIT_HASH << "\n" 
     << "CRC: " << static_cast<long>(MAIN_FILE_CRC) 
     << "\n=================================\n";

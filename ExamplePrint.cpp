@@ -4,7 +4,7 @@ Serial.print("Git Information:\n");
 Serial.print("Build Date/Time (local time): "); Serial.print(BUILD_DATE); Serial.print("\n");
 Serial.print("Builder's Name: "); Serial.print(GIT_USER_NAME); Serial.print(" Email: "); Serial.print(GIT_USER_EMAIL); Serial.print("\n");
 Serial.print("Repository URL: "); Serial.print(GIT_REPO_URL); Serial.print("\n");
-Serial.print("Branch: "); Serial.print(GIT_BRANCH); Serial.print(" Tag: "); Serial.print(GIT_TAG); Serial.print("\n\n"); // Optional, only use if using tags.
+Serial.print("Branch: "); Serial.print(GIT_BRANCH); Serial.print(" | Tag: "); Serial.print(GIT_TAG); Serial.print("\n\n"); // Optional, only use if using tags.
 Serial.print("Commit Hash: "); Serial.print(GIT_COMMIT_HASH); Serial.print("\n");
 Serial.print("CRC: "); Serial.println(static_cast<long>(MAIN_FILE_CRC));
 Serial.print("\n=================================\n");
@@ -20,7 +20,7 @@ Serial.print("\n=================================\n");
     << "Build Date/Time (local time): " << BUILD_DATE << "\n"
     << "Builder's Name:  " << GIT_USER_NAME << " Email: " << GIT_USER_EMAIL  << "\n"
     << "Repository URL: " << GIT_REPO_URL << "\n"
-    << "Branch: " << GIT_BRANCH << " Tag: " << GIT_TAG  << "\n\n"
+    << "Branch: " << GIT_BRANCH << " | Tag: " << GIT_TAG  << "\n\n"
     << "Commit Hash: " << GIT_COMMIT_HASH << "\n" 
     << "CRC: " << static_cast<long>(MAIN_FILE_CRC) 
     << "\n=================================\n";
