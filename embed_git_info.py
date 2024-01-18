@@ -1,12 +1,12 @@
-# https://bitbucket.org/exploratorium/pio-git-info-serial-print/src/main/
+# https://bitbucket.org/exploratorium/pio-git-info-serial-print
 
 # Importing the environment from PlatformIO and necessary modules
 Import("env")
 
-import subprocess
-import os
+import subprocess # For executing shell commands
+import os      # For file path operations
 import zlib  # For CRC calculation
-import datetime
+import datetime # For build date/time
 
 print("Embed Git Info Script has started")
 
@@ -52,16 +52,38 @@ def calculate_crc(filename):
     except Exception as e:
         return f"Error calculating CRC: {e}"
 
-# Function to write the gathered information into a header file
+# Function to write the Git information and CRC to a header file
 def write_header(info, crc):
+    # Construct the path to the header file
     header_path = os.path.join(env['PROJECT_DIR'], 'include', 'git_info.h')
+    # Open the header file in write mode
     with open(header_path, 'w') as f:
+        # Iterate over the Git information
         for key, value in info.items():
-            # Writing each piece of information as a macro definition
+            # Write each piece of information as a macro definition
             f.write(f"#define {key.upper()} \"{value}\"\n")
-        # Writing CRC information
+        # Write the CRC information
         f.write(f"#define MAIN_FILE_CRC {crc}\n")
+    # Add the path of the header file to the .gitignore file
+    add_to_gitignore(header_path)
 
+# Function to add a file path to the .gitignore file
+def add_to_gitignore(file_path):
+    # Check if the .gitignore file exists
+    if os.path.exists('.gitignore'):
+        # Open the .gitignore file in read and write mode
+        with open('.gitignore', 'r+') as f:
+            # Read the contents of the .gitignore file
+            lines = f.read()
+            # Check if the file path is already in the .gitignore file
+            if file_path not in lines:
+                # If it isn't, append it to a new line at the end of the file
+                f.write(f'\n{file_path}')
+                # Print a message indicating that the file path was added
+                print(f"Added {file_path} to .gitignore. You may need to use command 'git rm --cached {file_path}' to remove it from the repository.")
+    else:
+        # If the .gitignore file doesn't exist, print an error message
+        print("Error: .gitignore file does not exist.")
 
 # Main execution block
 try:
