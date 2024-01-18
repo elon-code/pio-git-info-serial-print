@@ -46,6 +46,7 @@ or if using streaming library:
     << "CRC: " << static_cast<long>(MAIN_FILE_CRC) 
     << "\n=================================\n";
 ```
+Note: This printout uses a significant amount of 
 
 ### Additional Configuration ###
 
