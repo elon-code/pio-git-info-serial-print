@@ -91,7 +91,9 @@ def write_header(info, crc):
 def add_to_gitignore(file_path):
     # Convert the absolute path to a relative path
     relative_path = os.path.relpath(file_path)
-    
+    # Replace backslashes with forward slashes (so that )
+    relative_path = relative_path.replace("\\", "/")
+
     # Check if the .gitignore file exists
     if os.path.exists('.gitignore'):
         # Open the .gitignore file in read and write mode
