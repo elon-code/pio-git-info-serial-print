@@ -1,6 +1,11 @@
 # README #
 Version 1.3
 
+### Security Note ###
+This script will have access to your file system using python. It will not modify any files, but it will read them. If you are concerned about security, you may want to look at the script and make sure it is not doing anything malicious. It is a very simple script, so it should be easy to understand.
+
+You may also unintentionally reveal information about your project that you do not want to share. Once again, if you are worried please review the script and printouts.
+
 ### What is this repository for? ###
 
 The purpose of this respository is to have an Arduino script that you can add to platform IO. The script will create a header file that will give you these as cpp variables. It uses Platform IO's python environment to run the script, so no need to install python. It will also automatically add the generated header file to your .gitignore file, so you don't have to worry about it being tracked by git.
