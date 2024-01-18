@@ -14,7 +14,7 @@ The purpose of this respository is to have an Arduino script that you can add to
 2. In your platform.ini file, include this line (replace embed_git_info.py with the name of your script, if different):
 ```extra_scripts = pre:embed_git_info.py```
 3. Include generated header in your main.cpp file: ```#include "git_info.h"```
-4. Add a serial printout for your git info:
+4. Add a serial printout for your git info. If using Arduino framework:
 ```
   // This is the recommended setup, you may choose other setups
   Serial.print("Git Information:\n");
@@ -32,7 +32,7 @@ The purpose of this respository is to have an Arduino script that you can add to
   //Serial.print("Git Update Date"); Serial.println(GIT_UPDATE_DATE); // Optional, depending on your workflow
 
 ```
-or if using streaming library:
+or if using streaming library with Arduino framework:
 ```
 // Using Streaming Library
   Serial << "Git Information:\n"
@@ -56,14 +56,14 @@ Note: This printout uses a significant amount of RAM and some flash. This was is
 * Code will auto-add the main_file path to your gitignore. If you have already tracked it with git, you will need to remove it from git tracking. You can do this with the following command:
 ```git rm --cached include/git_info.h```
 
-* Another thing to note is that you may want to add some #ifdef statements into your code to make sure it won't printout these headers when running in Arduino IDE. Here is an example of how to do this:
+* Another thing to note is that you may want to add some #ifdef statements into your code to make sure it won't printout these headers when running in Arduino IDE (or any other IDE). Here is an example of how to do this:
 ```
 #ifdef PLATFORMIO
   // Code to execute only when compiled with PlatformIO
 #endif
 ```
 
-* For AVR controllers, there is a special memory saving mode. This will reduce the amount of RAM and flash used by the printouts. It takes a special setup, so only do this if you have to. To enable this, go into the python script and change the following line:
+* For AVR controllers using Arduino framework, there is a special memory saving mode. This will reduce the amount of RAM and flash used by the printouts. It takes a special setup, so only do this if you have to. To enable this, go into the python script and change the following line:
 ```# USE_PROGMEM = True```
 You will need to change how you print out git info as it is using a special function. See here for more info: https://www.arduino.cc/reference/en/language/variables/utilities/progmem/
 
