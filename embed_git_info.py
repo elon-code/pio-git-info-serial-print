@@ -8,6 +8,9 @@ import os      # For file path operations
 import zlib  # For CRC calculation
 import datetime # For build date/time
 
+# Configuration flag for PROGMEM
+USE_PROGMEM = False
+
 print("Embed Git Info Script has started")
 
 # Function to gather git, system, and build information
@@ -56,14 +59,31 @@ def calculate_crc(filename):
 def write_header(info, crc):
     # Construct the path to the header file
     header_path = os.path.join(env['PROJECT_DIR'], 'include', 'git_info.h')
+
     # Open the header file in write mode
     with open(header_path, 'w') as f:
+        if USE_PROGMEM:
+            # If the target architecture is AVR
+            f.write("#ifdef __AVR__\n")
+            # Include the pgmspace.h library for PROGMEM
+            f.write("#include <avr/pgmspace.h>\n")
+            # Iterate over the Git information
+            for key, value in info.items():
+                # Write each piece of information as a const variable in PROGMEM
+                f.write(f"const char {key.upper()}[] PROGMEM = \"{value}\";\n")
+            # Write the CRC information in PROGMEM
+            f.write(f"const long MAIN_FILE_CRC PROGMEM = {crc};\n")
+            f.write("#else\n")
         # Iterate over the Git information
         for key, value in info.items():
-            # Write each piece of information as a macro definition
-            f.write(f"#define {key.upper()} \"{value}\"\n")
+            # Write each piece of information as a const variable
+            f.write(f"const char {key.upper()}[] = \"{value}\";\n")
         # Write the CRC information
-        f.write(f"#define MAIN_FILE_CRC {crc}\n")
+        f.write(f"const long MAIN_FILE_CRC = {crc};\n")
+        if USE_PROGMEM:
+            # End of conditional compilation
+            f.write("#endif\n")
+
     # Add the path of the header file to the .gitignore file
     add_to_gitignore(header_path)
 

@@ -46,7 +46,7 @@ or if using streaming library:
     << "CRC: " << static_cast<long>(MAIN_FILE_CRC) 
     << "\n=================================\n";
 ```
-Note: This printout uses a significant amount of 
+Note: This printout uses a significant amount of RAM and some flash. This was is reduced by using the F macro for printouts, however, it is still a significant amount. If you are running low on RAM or flash, you may want to consider removing some of the printouts. There is also a special memory saving mode for AVR controllers. See below in additional configuration.
 
 ### Additional Configuration ###
 
@@ -64,6 +64,11 @@ Note: This printout uses a significant amount of
   // Code to execute only when compiled with PlatformIO
 #endif
 ```
+
+* For AVR controllers, there is a special memory saving mode. This will reduce the amount of RAM and flash used by the printouts. It takes a special setup, so only do this if you have to. To enable this, go into the python script and change the following line:
+```# USE_PROGMEM = True```
+You will need to change how you print out git info as it is using a special function. See here for more info: https://www.arduino.cc/reference/en/language/variables/utilities/progmem/
+
 ### Dependencies ###
 
 PlatformIO is necessary, this will not work with Arduino IDE. Python is also a dependency, but this script uses platformIO's python environment, so no download or install is necessary. In fact, it is likely this code will not run successfully on your local environment, it is designed to be ran in PlatformIO python environment.
