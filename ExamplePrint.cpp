@@ -8,7 +8,6 @@ Serial.print(F("Branch: ")); Serial.print(GIT_BRANCH); Serial.print(F(" | Tag: "
 Serial.print(F("Commit Hash: ")); Serial.print(GIT_COMMIT_HASH); Serial.print(F("\n"));
 Serial.print(F("CRC: ")); Serial.println(static_cast<long>(MAIN_FILE_CRC));
 Serial.print(F("\n=================================\n"));
-Serial.flush();
 
   // These are optional. Not really necessary as it's easy to see who worked on repo by going to link.
   // To enable, go into python script and uncomment.
