@@ -1,10 +1,9 @@
 # README #
+Version 1.3
 
 ### What is this repository for? ###
 
-* Quick summary
-The purpose of this respository is to have an Arduino script that you can add to platform IO. The script will create a header file that will give you these as cpp variables.
-* Version 1.2
+The purpose of this respository is to have an Arduino script that you can add to platform IO. The script will create a header file that will give you these as cpp variables. It uses Platform IO's python environment to run the script, so no need to install python. It will also automatically add the generated header file to your .gitignore file, so you don't have to worry about it being tracked by git.
 
 ### Summary of set up ###
 
@@ -29,7 +28,6 @@ The purpose of this respository is to have an Arduino script that you can add to
   //Serial.print("Branch: "); Serial.println(GIT_BRANCH); // Optional, depending on your workflow
   //Serial.print("Git Update Date"); Serial.println(GIT_UPDATE_DATE); // Optional, depending on your workflow
 
-
 ```
 or if using streaming library:
 ```
@@ -51,7 +49,7 @@ or if using streaming library:
 * If you are using a non-standard main file (file that is not main.cpp in src folder), you will need to change the following line in the python script:
 ```main_file = "src/main.cpp"``` to the path of your main file.
 
-* Be sure to add the auto-generated header file path (relative path) to your .gitignore file. If you have already tracked it with git, you will need to remove it from git tracking. You can do this with the following command:
+* Code will auto-add the main_file path to your gitignore. If you have already tracked it with git, you will need to remove it from git tracking. You can do this with the following command:
 ```git rm --cached include/git_info.h```
 
 * Another thing to note is that you may want to add some #ifdef statements into your code to make sure it won't printout these headers when running in Arduino IDE. Here is an example of how to do this:
@@ -63,6 +61,8 @@ or if using streaming library:
 ### Dependencies ###
 
 PlatformIO is necessary, this will not work with Arduino IDE. Python is also a dependency, but this script uses platformIO's python environment, so no download or install is necessary. In fact, it is likely this code will not run successfully on your local environment, it is designed to be ran in PlatformIO python environment.
+
+Streaming library is optional, but recommended. It makes printing out the git info much easier. You can find it here: https://github.com/janelia-arduino/Streaming
 
 ### Who do I talk to? ###
 
