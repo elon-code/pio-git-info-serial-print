@@ -9,19 +9,17 @@ Serial.print(F("Commit Hash: ")); Serial.print(GIT_COMMIT_HASH); Serial.print(F(
 Serial.print(F("CRC: ")); Serial.println(static_cast<long>(MAIN_FILE_CRC));
 Serial.print(F("\n=================================\n"));
 
-
   // These are optional. Not really necessary as it's easy to see who worked on repo by going to link.
   // To enable, go into python script and uncomment.
   //Serial.print("Branch: "); Serial.println(GIT_BRANCH); // Optional, depending on your workflow
   //Serial.print("Git Update Date"); Serial.println(GIT_UPDATE_DATE); // Optional, depending on your workflow
 
-```
 // If using Streaming Library: https://github.com/janelia-arduino/Streaming
-  Serial << F("Git Information:\n")
-    << F("Build Date/Time (local time): ") << BUILD_DATE << F("\n")
-    << F("Builder's Name:  ") << GIT_USER_NAME << F(" Email: ") << GIT_USER_EMAIL  << F("\n")
-    << F("Repository URL: ") << GIT_REPO_URL << F("\n")
-    << F("Branch: ") << GIT_BRANCH << F(" | Tag: ") << GIT_TAG  << F("\n\n")
-    << F("Commit Hash: ") << GIT_COMMIT_HASH << F("\n") 
-    << F("CRC: ") << static_cast<long>(MAIN_FILE_CRC) 
-    << F("\n=================================\n");
+Serial << F("Git Information:\n")
+  << F("Build Date/Time (local time): ") << BUILD_DATE << F("\n")
+  << F("Builder's Name:  ") << GIT_USER_NAME << F(" Email: ") << GIT_USER_EMAIL  << F("\n")
+  << F("Repository URL: ") << GIT_REPO_URL << F("\n")
+  << F("Branch: ") << GIT_BRANCH << F(" | Tag: ") << GIT_TAG  << F("\n\n")
+  << F("Commit Hash: ") << GIT_COMMIT_HASH << F("\n") 
+  << F("CRC: ") << static_cast<long>(MAIN_FILE_CRC) 
+  << F("\n=================================") << endl;
