@@ -9,7 +9,8 @@ import zlib  # For CRC calculation
 import datetime # For build date/time
 
 # Configuration flag for PROGMEM
-USE_PROGMEM = False
+USE_PROGMEM = False # Set to True if the target architecture is AVR
+USE_CRC = False # Set to True to calculate the CRC of the main file
 
 print("Embed Git Info Script has started")
 
@@ -48,12 +49,15 @@ def get_git_info():
 
 # Function to calculate the CRC of a given file
 def calculate_crc(filename):
-    try:
-        with open(filename, 'rb') as file:
-            data = file.read()
-            return zlib.crc32(data)
-    except Exception as e:
+    if not USE_CRC: # If CRC is not desired,
+        return None
+    try: # Try to calculate the CRC when CRC is desired
+        with open(filename, 'rb') as file: # Open the file in read mode
+            data = file.read() # Read the file
+            return zlib.crc32(data) # Calculate the CRC
+    except Exception as e: # If an error occurs, print an error message
         return f"Error calculating CRC: {e}"
+
 
 # Function to write the Git information and CRC to a header file
 def write_header(info, crc):
@@ -79,7 +83,8 @@ def write_header(info, crc):
             # Write each piece of information as a const variable
             f.write(f"const char {key.upper()}[] = \"{value}\";\n")
         # Write the CRC information
-        f.write(f"const long MAIN_FILE_CRC = {crc};\n")
+        if USE_CRC:
+            f.write(f"const long MAIN_FILE_CRC = {crc};\n")
         if USE_PROGMEM:
             # End of conditional compilation
             f.write("#endif\n")
