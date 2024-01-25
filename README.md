@@ -24,6 +24,7 @@ The purpose of this respository is to have an Arduino script that you can add to
   Serial.print(F("Branch: ")); Serial.print(GIT_BRANCH); Serial.print(F(" | Tag: ")); Serial.print(GIT_TAG); Serial.print(F("\n\n")); // Optional, only use if using tags.
   Serial.print(F("Commit Hash: ")); Serial.print(GIT_COMMIT_HASH); Serial.print(F("\n"));
   Serial.print(F("\n=================================\n"));
+  Serial.flush(); // Flush the buffer to ensure all the data is sent to the serial port
 
   // These are optional. Not really necessary as it's easy to see who worked on repo by going to link.
   // To enable, go into python script and uncomment.
