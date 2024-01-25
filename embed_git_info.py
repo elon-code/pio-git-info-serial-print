@@ -62,10 +62,15 @@ def calculate_crc(filename):
 # Function to write the Git information and CRC to a header file
 def write_header(info, crc):
     # Construct the path to the header file
-    header_path = os.path.join(env['PROJECT_DIR'], 'include', 'git_info.h')
-
+    header_file_name = 'git_info.h'
+    header_path = os.path.join(env['PROJECT_DIR'], 'include', header_file_name)
+    # Construct the guard ID for the header file
+    guard_id = header_file_name.replace('.', '_').upper()
     # Open the header file in write mode
     with open(header_path, 'w') as f:
+        # Write the header guard
+        f.write(f"#ifndef {guard_id}\n")
+        f.write(f"#define {guard_id}\n")
         if USE_PROGMEM:
             # If the target architecture is AVR
             f.write("#ifdef __AVR__\n")
@@ -76,7 +81,8 @@ def write_header(info, crc):
                 # Write each piece of information as a const variable in PROGMEM
                 f.write(f"const char {key.upper()}[] PROGMEM = \"{value}\";\n")
             # Write the CRC information in PROGMEM
-            f.write(f"const long MAIN_FILE_CRC PROGMEM = {crc};\n")
+            if USE_CRC:
+                f.write(f"const long MAIN_FILE_CRC PROGMEM = {crc};\n")
             f.write("#else\n")
         # Iterate over the Git information
         for key, value in info.items():
@@ -88,7 +94,8 @@ def write_header(info, crc):
         if USE_PROGMEM:
             # End of conditional compilation
             f.write("#endif\n")
-
+    # End of header guard
+    f.write(f"#endif // {guard_id}\n")
     # Add the path of the header file to the .gitignore file
     add_to_gitignore(header_path)
 
