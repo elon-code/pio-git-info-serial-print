@@ -1,10 +1,8 @@
 # README #
-Version 1.3
+Version 1.4
 
 ### Security Note ###
 This script will have access to your file system using python. It will not modify any files, but it will read them. If you are concerned about security, you may want to look at the script and make sure it is not doing anything malicious. It is a very simple script, so it should be easy to understand.
-
-You may also unintentionally reveal information about your project that you do not want to share. Once again, if you are worried please review the script and printouts.
 
 ### What is this repository for? ###
 
@@ -19,32 +17,32 @@ The purpose of this respository is to have an Arduino script that you can add to
 4. Add a serial printout for your git info. If using Arduino framework:
 ```
   // This is the recommended setup, you may choose other setups
-  Serial.print("Git Information:\n");
-  Serial.print("Build Date/Time (local time): "); Serial.print(BUILD_DATE); Serial.print("\n");
-  Serial.print("Builder's Name: "); Serial.print(GIT_USER_NAME); Serial.print(" Email: "); Serial.print(GIT_USER_EMAIL); Serial.print("\n");
-  Serial.print("Repository URL: "); Serial.print(GIT_REPO_URL); Serial.print("\n");
-  Serial.print("Branch: "); Serial.print(GIT_BRANCH); Serial.print(" | Tag: "); Serial.print(GIT_TAG); Serial.print("\n\n"); // Optional, only use if using tags.
-  Serial.print("Commit Hash: "); Serial.print(GIT_COMMIT_HASH); Serial.print("\n");
-  Serial.print("CRC: "); Serial.println(static_cast<long>(MAIN_FILE_CRC));
-  Serial.print("\n=================================\n");
+  Serial.print(F("Git Information:\n"));
+  Serial.print(F("Build Date/Time (local time): ")); Serial.print(BUILD_DATE); Serial.print(F("\n"));
+  Serial.print(F("Builder's Name: ")); Serial.print(GIT_USER_NAME); Serial.print(F(" Email: ")); Serial.print(GIT_USER_EMAIL); Serial.print(F("\n"));
+  Serial.print(F("Repository URL: ")); Serial.print(GIT_REPO_URL); Serial.print(F("\n"));
+  Serial.print(F("Branch: ")); Serial.print(GIT_BRANCH); Serial.print(F(" | Tag: ")); Serial.print(GIT_TAG); Serial.print(F("\n\n")); // Optional, only use if using tags.
+  Serial.print(F("Commit Hash: ")); Serial.print(GIT_COMMIT_HASH); Serial.print(F("\n"));
+  Serial.print(F("\n=================================\n"));
+  Serial.flush(); // Flush the buffer to ensure all the data is sent to the serial port
 
   // These are optional. Not really necessary as it's easy to see who worked on repo by going to link.
   // To enable, go into python script and uncomment.
+  //Serial.print(CRC: "); Serial.print(static_cast<long>(MAIN_FILE_CRC)); Serial.print(F("\n")); // Optional, depending on your workflow
   //Serial.print("Branch: "); Serial.println(GIT_BRANCH); // Optional, depending on your workflow
   //Serial.print("Git Update Date"); Serial.println(GIT_UPDATE_DATE); // Optional, depending on your workflow
 
 ```
 or if using streaming library with Arduino framework:
 ```
-// Using Streaming Library
-  Serial << "Git Information:\n"
-    << "Build Date/Time (local time): " << BUILD_DATE << "\n"
-    << "Builder's Name:  " << GIT_USER_NAME << " Email: " << GIT_USER_EMAIL  << "\n"
-    << "Repository URL: " << GIT_REPO_URL << "\n"
-    << "Branch: " << GIT_BRANCH << " | Tag: " << GIT_TAG  << "\n\n"
-    << "Commit Hash: " << GIT_COMMIT_HASH << "\n" 
-    << "CRC: " << static_cast<long>(MAIN_FILE_CRC) 
-    << "\n=================================\n";
+// If using Streaming Library: https://github.com/janelia-arduino/Streaming
+Serial << F("Git Information:\n")
+  << F("Build Date/Time (local time): ") << BUILD_DATE << F("\n")
+  << F("Builder's Name:  ") << GIT_USER_NAME << F(" Email: ") << GIT_USER_EMAIL  << F("\n")
+  << F("Repository URL: ") << GIT_REPO_URL << F("\n")
+  << F("Branch: ") << GIT_BRANCH << F(" | Tag: ") << GIT_TAG  << F("\n\n")
+  << F("Commit Hash: ") << GIT_COMMIT_HASH << F("\n") 
+  << F("\n=================================") << endl;
 ```
 Note: This printout uses a significant amount of RAM and some flash. This was is reduced by using the F macro for printouts, however, it is still a significant amount. If you are running low on RAM or flash, you may want to consider removing some of the printouts. There is also a special memory saving mode for AVR controllers. See below in additional configuration.
 
@@ -77,4 +75,4 @@ Streaming library is optional, but recommended. It makes printing out the git in
 
 ### Who do I talk to? ###
 
-Repo owner: Elon Goliger egoliger@exploratorium.edu or elon2000@gmail.com
+Repo owner: Elon Goliger elon2000@gmail.com

@@ -8,8 +8,9 @@ import os      # For file path operations
 import zlib  # For CRC calculation
 import datetime # For build date/time
 
-# Configuration flag for PROGMEM
-USE_PROGMEM = False
+# Set to True to calculate the CRC of the main file and print it to the serial monitor
+# The rest of the commands can be enabled/disabled in the get_git_info() function
+USE_CRC = False # Set to True to calculate the CRC of the main file
 
 print("Embed Git Info Script has started")
 
@@ -48,42 +49,37 @@ def get_git_info():
 
 # Function to calculate the CRC of a given file
 def calculate_crc(filename):
-    try:
-        with open(filename, 'rb') as file:
-            data = file.read()
-            return zlib.crc32(data)
-    except Exception as e:
+    if not USE_CRC: # If CRC is not desired,
+        return None
+    try: # Try to calculate the CRC when CRC is desired
+        with open(filename, 'rb') as file: # Open the file in read mode
+            data = file.read() # Read the file
+            return zlib.crc32(data) # Calculate the CRC
+    except Exception as e: # If an error occurs, print an error message
         return f"Error calculating CRC: {e}"
+
 
 # Function to write the Git information and CRC to a header file
 def write_header(info, crc):
     # Construct the path to the header file
-    header_path = os.path.join(env['PROJECT_DIR'], 'include', 'git_info.h')
-
+    header_file_name = 'git_info.h'
+    header_path = os.path.join(env['PROJECT_DIR'], 'include', header_file_name)
+    # Construct the guard ID for the header file
+    guard_id = header_file_name.replace('.', '_').upper()
     # Open the header file in write mode
     with open(header_path, 'w') as f:
-        if USE_PROGMEM:
-            # If the target architecture is AVR
-            f.write("#ifdef __AVR__\n")
-            # Include the pgmspace.h library for PROGMEM
-            f.write("#include <avr/pgmspace.h>\n")
-            # Iterate over the Git information
-            for key, value in info.items():
-                # Write each piece of information as a const variable in PROGMEM
-                f.write(f"const char {key.upper()}[] PROGMEM = \"{value}\";\n")
-            # Write the CRC information in PROGMEM
-            f.write(f"const long MAIN_FILE_CRC PROGMEM = {crc};\n")
-            f.write("#else\n")
+        # Write the header guard
+        f.write(f"#ifndef {guard_id}\n")
+        f.write(f"#define {guard_id}\n")
         # Iterate over the Git information
         for key, value in info.items():
             # Write each piece of information as a const variable
             f.write(f"const char {key.upper()}[] = \"{value}\";\n")
         # Write the CRC information
-        f.write(f"const long MAIN_FILE_CRC = {crc};\n")
-        if USE_PROGMEM:
-            # End of conditional compilation
-            f.write("#endif\n")
-
+        if USE_CRC:
+            f.write(f"const long MAIN_FILE_CRC = {crc};\n")
+        # End of header guard
+        f.write(f"#endif // {guard_id}\n")
     # Add the path of the header file to the .gitignore file
     add_to_gitignore(header_path)
 
@@ -91,7 +87,9 @@ def write_header(info, crc):
 def add_to_gitignore(file_path):
     # Convert the absolute path to a relative path
     relative_path = os.path.relpath(file_path)
-    
+    # Replace backslashes with forward slashes (so that )
+    relative_path = relative_path.replace("\\", "/")
+
     # Check if the .gitignore file exists
     if os.path.exists('.gitignore'):
         # Open the .gitignore file in read and write mode
