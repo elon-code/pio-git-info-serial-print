@@ -28,7 +28,7 @@ The purpose of this respository is to have an Arduino script that you can add to
 
   // These are optional. Not really necessary as it's easy to see who worked on repo by going to link.
   // To enable, go into python script and uncomment.
-  //Seria.print(CRC: "); Serial.print(static_cast<long>(MAIN_FILE_CRC)); Serial.print(F("\n")); // Optional, depending on your workflow
+  //Serial.print(CRC: "); Serial.print(static_cast<long>(MAIN_FILE_CRC)); Serial.print(F("\n")); // Optional, depending on your workflow
   //Serial.print("Branch: "); Serial.println(GIT_BRANCH); // Optional, depending on your workflow
   //Serial.print("Git Update Date"); Serial.println(GIT_UPDATE_DATE); // Optional, depending on your workflow
 
