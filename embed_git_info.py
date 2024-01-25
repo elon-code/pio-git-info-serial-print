@@ -8,8 +8,8 @@ import os      # For file path operations
 import zlib  # For CRC calculation
 import datetime # For build date/time
 
-# Configuration flag for PROGMEM
-USE_PROGMEM = False # Set to True if the target architecture is AVR
+# Set to True to calculate the CRC of the main file and print it to the serial monitor
+# The rest of the commands can be enabled/disabled in the get_git_info() function
 USE_CRC = False # Set to True to calculate the CRC of the main file
 
 print("Embed Git Info Script has started")
@@ -71,19 +71,6 @@ def write_header(info, crc):
         # Write the header guard
         f.write(f"#ifndef {guard_id}\n")
         f.write(f"#define {guard_id}\n")
-        if USE_PROGMEM:
-            # If the target architecture is AVR
-            f.write("#ifdef __AVR__\n")
-            # Include the pgmspace.h library for PROGMEM
-            f.write("#include <avr/pgmspace.h>\n")
-            # Iterate over the Git information
-            for key, value in info.items():
-                # Write each piece of information as a const variable in PROGMEM
-                f.write(f"const char {key.upper()}[] PROGMEM = \"{value}\";\n")
-            # Write the CRC information in PROGMEM
-            if USE_CRC:
-                f.write(f"const long MAIN_FILE_CRC PROGMEM = {crc};\n")
-            f.write("#else\n")
         # Iterate over the Git information
         for key, value in info.items():
             # Write each piece of information as a const variable
@@ -91,11 +78,8 @@ def write_header(info, crc):
         # Write the CRC information
         if USE_CRC:
             f.write(f"const long MAIN_FILE_CRC = {crc};\n")
-        if USE_PROGMEM:
-            # End of conditional compilation
-            f.write("#endif\n")
-    # End of header guard
-    f.write(f"#endif // {guard_id}\n")
+        # End of header guard
+        f.write(f"#endif // {guard_id}\n")
     # Add the path of the header file to the .gitignore file
     add_to_gitignore(header_path)
 
