@@ -22,5 +22,5 @@
   "platforms": "*",
   "build": {
     "extraScript": "embed_git_info.py"
-  }
+}
 }
