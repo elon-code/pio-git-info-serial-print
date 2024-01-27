@@ -1,5 +1,5 @@
 # README #
-Version 1.7
+Version 1.7.1
 
 ### Security Note ###
 This script will have access to your file system using python. It will not modify any files, but it will read them. If you are concerned about security, you may want to look at the script and make sure it is not doing anything malicious. It is a very simple script, so it should be easy to understand.
