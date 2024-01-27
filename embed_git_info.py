@@ -81,30 +81,6 @@ def write_header(info, crc):
         # End of header guard
         f.write(f"#endif // {guard_id}\n")
     # Add the path of the header file to the .gitignore file
-    add_to_gitignore(header_path)
-
-# Function to add a file path to the .gitignore file
-def add_to_gitignore(file_path):
-    # Convert the absolute path to a relative path
-    relative_path = os.path.relpath(file_path)
-    # Replace backslashes with forward slashes (so that )
-    relative_path = relative_path.replace("\\", "/")
-
-    # Check if the .gitignore file exists
-    if os.path.exists('.gitignore'):
-        # Open the .gitignore file in read and write mode
-        with open('.gitignore', 'r+') as f:
-            # Read the contents of the .gitignore file
-            lines = f.read()
-            # Check if the relative path is already in the .gitignore file
-            if relative_path not in lines:
-                # If it isn't, append it to a new line at the end of the file
-                f.write(f'\n{relative_path}')
-                # Print a message indicating that the file path was added
-                print(f"Added {relative_path} to .gitignore. You may need to use command 'git rm --cached {relative_path}' to remove it from the repository.")
-    else:
-        # If the .gitignore file doesn't exist, print an error message
-        print("Error: .gitignore file does not exist.")
 
 # Main execution block
 try:
