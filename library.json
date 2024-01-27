@@ -1,0 +1,26 @@
+{
+  "name": "PlatformIO Git Info Serial Print",
+  "version": "1.6",
+  "description": "This library is used to print git information to the serial port. It is used in conjunction with the PlatformIO build system, using it's local python interpreter to run the git commands and abstract them to a header file.",
+  "keywords": "extrascript, python, helper, script, git",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/elon-code/pio-git-info-serial-print.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Elon Goliger Mallimson",
+      "email": "elon2000@gmail.com",
+      "url": "https://www.linkedin.com/in/elongoliger",
+      "maintainer": true
+    }
+  ],
+  "license": "MIT",
+  "frameworks": "*",
+  "platforms": "*",
+  "build": {
+    "extraScript": "embed_git_info.py"
+}
+}
