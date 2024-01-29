@@ -63,7 +63,7 @@ def calculate_crc(filename):
 def write_header(info, crc):
     # Construct the path to the header file
     header_file_name = 'git_info.h'
-    header_path = os.path.join("$PROGPATH",'include', header_file_name)
+    header_path = os.path.join('include', header_file_name)
     # Construct the guard ID for the header file
     guard_id = header_file_name.replace('.', '_').upper()
     # Open the header file in write mode
