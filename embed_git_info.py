@@ -67,20 +67,26 @@ def write_header(info, crc):
     # Construct the guard ID for the header file
     guard_id = header_file_name.replace('.', '_').upper()
     # Open the header file in write mode
-    with open(header_path, 'w') as f:
-        # Write the header guard
-        f.write(f"#ifndef {guard_id}\n")
-        f.write(f"#define {guard_id}\n")
-        # Iterate over the Git information
-        for key, value in info.items():
-            # Write each piece of information as a const variable
-            f.write(f"const char {key.upper()}[] = \"{value}\";\n")
-        # Write the CRC information
-        if USE_CRC:
-            f.write(f"const long MAIN_FILE_CRC = {crc};\n")
-        # End of header guard
-        f.write(f"#endif // {guard_id}\n")
-    # Add the path of the header file to the .gitignore file
+    try:
+        with open(header_path, 'w') as f:
+            # Write the header guard
+            f.write(f"#ifndef {guard_id}\n")
+            f.write(f"#define {guard_id}\n")
+            # Iterate over the Git information
+            for key, value in info.items():
+                # Write each piece of information as a const variable
+                f.write(f"const char {key.upper()}[] = \"{value}\";\n")
+            # Write the CRC information
+            if USE_CRC:
+                f.write(f"const long MAIN_FILE_CRC = {crc};\n")
+            # End of header guard
+            f.write(f"#endif // {guard_id}\n")
+    except FileNotFoundError:
+        print(f"Could not find the header file: {header_path}")
+    except PermissionError:
+        print(f"Error")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 # Main execution block
 try:
