@@ -1,7 +1,7 @@
 # https://bitbucket.org/exploratorium/pio-git-info-serial-print
 
 # Importing the environment from PlatformIO and necessary modules
-Import("env")
+Import('env') # type: ignore
 
 import subprocess # For executing shell commands
 import os      # For file path operations
