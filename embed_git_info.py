@@ -71,7 +71,8 @@ def calculate_crc(filename):
 
 # Function to write the Git information and CRC to a header file
 def write_header(info, crc):
-    os.chdir(project_dir) # Change the working directory to the project's directory
+    os.chdir(cwd) # Change the working directory to the project's directory
+    print("Writing git_info.h to library directory: ", cwd)
     # Construct the path to the header file
     header_file_name = 'git_info.h'
     header_path = os.path.join('include', header_file_name)
