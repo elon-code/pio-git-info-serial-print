@@ -14,8 +14,17 @@ USE_CRC = False # Set to True to calculate the CRC of the main file
 
 print("Embed Git Info Script has started")
 
+# Get the path to project's working directory
+project_dir = env['PROJECT_DIR'] # type: ignore
+# Get the path to current working directory
+cwd = os.getcwd()
+
 # Function to gather git, system, and build information
 def get_git_info():
+    
+    # Change the working directory to the project's directory
+    os.chdir(project_dir)
+
     # Commands to extract various information
     commands = { # Comment out undesirable variables to save on storage
         'git_tag': "git describe --tags --always",
@@ -49,6 +58,7 @@ def get_git_info():
 
 # Function to calculate the CRC of a given file
 def calculate_crc(filename):
+    os.chdir(project_dir) # Change the working directory to the project's directory
     if not USE_CRC: # If CRC is not desired,
         return None
     try: # Try to calculate the CRC when CRC is desired
@@ -61,6 +71,7 @@ def calculate_crc(filename):
 
 # Function to write the Git information and CRC to a header file
 def write_header(info, crc):
+    os.chdir(project_dir) # Change the working directory to the project's directory
     # Construct the path to the header file
     header_file_name = 'git_info.h'
     header_path = os.path.join('include', header_file_name)
